@@ -7,6 +7,8 @@ export default class GlobalResponseSerializerInterceptor {
       // TODO - Serialize with DTO-like validaton and data stripping
     })
 
+    // https://stackoverflow.com/questions/54526179/node-js-difference-between-http-finish-event-response-close-event-and-respons
+
     await next()
   }
 }

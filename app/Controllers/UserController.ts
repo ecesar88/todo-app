@@ -20,6 +20,18 @@ export default class UserController {
     return ctx.response.status(HttpStatus.CREATED).send(createdUser)
   }
 
+  public async findOne({ response: res, params }: HttpContextContract) {
+    const id = Number(params.id)
+
+    const user = await prisma.user.findFirst({
+      where: {
+        id,
+      },
+    })
+
+    return res.status(HttpStatus.CREATED).send(user)
+  }
+
   public async delete({ response: res, params }: HttpContextContract) {
     const id = Number(params.id)
 

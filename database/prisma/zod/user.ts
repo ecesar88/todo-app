@@ -1,5 +1,6 @@
-import * as z from 'zod'
-import { CompletePost, RelatedPostModel } from './index'
+import * as z from "zod"
+import * as imports from "../../src/zod-schemas"
+import { CompletePost, RelatedPostModel } from "./index"
 
 export const UserModel = z.object({
   id: z.number().int(),
@@ -16,8 +17,6 @@ export interface CompleteUser extends z.infer<typeof UserModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedUserModel: z.ZodSchema<CompleteUser> = z.lazy(() =>
-  UserModel.extend({
-    posts: RelatedPostModel.array(),
-  })
-)
+export const RelatedUserModel: z.ZodSchema<CompleteUser> = z.lazy(() => UserModel.extend({
+  posts: RelatedPostModel.array(),
+}))

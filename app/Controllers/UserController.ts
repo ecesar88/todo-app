@@ -4,20 +4,20 @@ import { HttpStatus } from 'App/Lib/Api/enums/http-status.enum'
 import { CreateUserSchema, GetUserSchema } from 'App/Lib/Api/schemas/UserSchema'
 
 export default class UserController {
-  public async get(ctx: HttpContextContract) {
+  public async get({ response: res }: HttpContextContract) {
     const users = await prisma.user.findMany()
 
-    return ctx.response.status(HttpStatus.OK).send(users.map((user) => GetUserSchema.parse(user)))
+    return res.status(HttpStatus.OK).send(users.map((user) => GetUserSchema.parse(user)))
   }
 
-  public async create(ctx: HttpContextContract) {
-    const user = await CreateUserSchema.parseAsync(ctx.request.body())
+  public async create({ response: res, request: req }: HttpContextContract) {
+    const user = await CreateUserSchema.parseAsync(req.body())
 
     const createdUser = await prisma.user.create({
       data: user,
     })
 
-    return ctx.response.status(HttpStatus.CREATED).send(createdUser)
+    return res.status(HttpStatus.CREATED).send(createdUser)
   }
 
   public async findOne({ response: res, params }: HttpContextContract) {

@@ -23,3 +23,9 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
+
+Route.group(() => {
+  Route.get('users', 'UserController.get')
+  Route.post('users', 'UserController.create')
+  Route.delete('users/:id', 'UserController.delete')
+})

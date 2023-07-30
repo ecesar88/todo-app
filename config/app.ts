@@ -66,7 +66,7 @@ export const http: ServerConfig = {
   | HTTP request and set it as `x-request-id` header.
   |
   */
-  generateRequestId: false,
+  generateRequestId: true,
 
   /*
   |--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ export const http: ServerConfig = {
   | Whether or not to generate an etag for every response.
   |
   */
-  etag: false,
+  etag: true,
 
   /*
   |--------------------------------------------------------------------------

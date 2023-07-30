@@ -3,6 +3,8 @@
   "include": ["**/*"],
   "exclude": ["node_modules", "build"],
   "compilerOptions": {
+    "strict": true,
+    "baseUrl": "./",
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
@@ -12,6 +14,11 @@
       "Contracts/*": ["./contracts/*"],
       "Database/*": ["./database/*"]
     },
-    "types": ["@adonisjs/core", "@adonisjs/repl", "@japa/preset-adonis/build/adonis-typings"]
+    "types": [
+      "@adonisjs/core",
+      "@adonisjs/repl",
+      "@japa/preset-adonis/build/adonis-typings",
+      "@wahyubucil/adonis-prisma"
+    ]
   }
 }

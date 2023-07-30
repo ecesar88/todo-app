@@ -1,27 +1,34 @@
 import { prisma } from '@ioc:Adonis/Addons/Prisma'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
-import { UserModel } from 'Database/prisma/zod'
+import { HttpStatus } from 'App/Lib/Api/enums/http-status.enum'
+import { CreateUserSchema, GetUserSchema } from 'App/Lib/Api/schemas/UserSchema'
 
 export default class UserController {
-  public async get(_ctx: HttpContextContract) {
-    return prisma.user.findMany()
+  public async get(ctx: HttpContextContract) {
+    const users = await prisma.user.findMany()
+
+    return ctx.response.status(HttpStatus.OK).send(users.map((user) => GetUserSchema.parse(user)))
   }
 
   public async create(ctx: HttpContextContract) {
-    // Validate body
-    const user = await UserModel.omit({ id: true }).parseAsync(ctx.request.body())
+    const user = await CreateUserSchema.parseAsync(ctx.request.body())
 
-    await prisma.user.create({
+    const createdUser = await prisma.user.create({
       data: user,
     })
+
+    return ctx.response.status(HttpStatus.CREATED).send(createdUser)
   }
 
-  public async delete(ctx: HttpContextContract) {
-    const { id } = ctx.request.params()
+  public async delete({ response: res, params }: HttpContextContract) {
+    const id = Number(params.id)
 
     await prisma.user.delete({
-      where: id,
+      where: {
+        id,
+      },
     })
+
+    return res.status(HttpStatus.NO_CONTENT)
   }
 }

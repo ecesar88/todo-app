@@ -1,0 +1,3 @@
+class GlobalResponseSerializer {
+  constructor(parameters) {}
+}

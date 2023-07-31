@@ -19,8 +19,7 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-
-const numericId = new RegExp(/^[0-9]+$/)
+import { numericId } from 'App/Lib/Api/routeMatchers'
 
 Route.get('/', async () => {
   return { hello: 'world' }

@@ -27,6 +27,7 @@ export default class GlobalResponseSerializerInterceptor {
       return response
     }
 
+    // Intercept and modify response
     res.send = function () {
       arguments[0] = modifyResponse(arguments[0])
       // (body: any, generateEtag?: boolean | undefined) => void

@@ -36,8 +36,9 @@ export default class UserController {
   }
 
   public async update({ response: res, request: req, params: { id } }: HttpContextContract) {
-    const dataToUpdate: Partial<UserWithoutId> = await UpdateUserSchema.parseAsync(req.body())
+    const dataToUpdate = await UpdateUserSchema.parseAsync(req.body())
 
+    // fix zod erro schema
     const user = await prisma.user.update({
       where: {
         id: parseInt(id),

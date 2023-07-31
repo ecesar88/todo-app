@@ -1,18 +1,14 @@
-import { z } from 'zod'
 import { Todo } from '@prisma/client'
+import { TodoModel } from 'Database/prisma/zod'
 
 export type TodoWithoutId = Omit<Todo, 'id'>
 
-export const TodoSchema = z.object({
-  id: z.number(),
-  email: z.string(),
-  name: z.string().nullable(),
-})
+export const TodoSchema = TodoModel
 
-export const CreateTodoSchema = TodoSchema.omit({
+export const CreateTodoSchema = TodoModel.omit({
   id: true,
 })
 
-export const UpdateTodoSchema = TodoSchema.omit({
+export const UpdateTodoSchema = TodoModel.omit({
   id: true,
 }).optional()

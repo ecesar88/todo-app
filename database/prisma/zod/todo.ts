@@ -1,6 +1,5 @@
-import * as z from "zod"
-import * as imports from "../../src/zod-schemas"
-import { CompleteUser, RelatedUserModel } from "./index"
+import * as z from 'zod'
+import { CompleteUser, RelatedUserModel } from './index'
 
 export const TodoModel = z.object({
   id: z.number().int(),
@@ -19,6 +18,8 @@ export interface CompleteTodo extends z.infer<typeof TodoModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const RelatedTodoModel: z.ZodSchema<CompleteTodo> = z.lazy(() => TodoModel.extend({
-  User: RelatedUserModel.nullish(),
-}))
+export const RelatedTodoModel: z.ZodSchema<CompleteTodo> = z.lazy(() =>
+  TodoModel.extend({
+    User: RelatedUserModel.nullish(),
+  })
+)

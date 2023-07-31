@@ -1,5 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { HttpStatus } from 'App/Lib/Api/enums/http-status.enum'
+import { prisma } from '@ioc:Adonis/Addons/Prisma'
+import { CreateUserSchema, UpdateUserSchema, UserSchema } from 'App/Lib/Api/schemas/model/UserSchema'
 
 export default class TodoController {
   public async get({ response: res }: HttpContextContract) {

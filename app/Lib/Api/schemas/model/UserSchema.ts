@@ -1,13 +1,9 @@
-import { z } from 'zod'
 import { User } from '@prisma/client'
+import { UserModel } from 'Database/prisma/zod'
 
 export type UserWithoutId = Omit<User, 'id'>
 
-export const UserSchema = z.object({
-  id: z.number(),
-  email: z.string(),
-  name: z.string().nullable(),
-})
+export const UserSchema = UserModel
 
 export const CreateUserSchema = UserSchema.omit({
   id: true,

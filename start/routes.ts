@@ -39,5 +39,9 @@ Route.group(() => {
 })
 
 Route.group(() => {
-  Route.get('todo', 'TodoController.get')
+  Route.get('todos', 'TodoController.get'),
+    Route.get('todos/:id', 'TodoController.findOne').where('id', numericId)
+  Route.post('todos', 'TodoController.create')
+  Route.patch('todos/:id', 'TodoController.update').where('id', numericId)
+  Route.delete('todos/:id', 'TodoController.delete').where('id', numericId)
 })

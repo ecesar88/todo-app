@@ -6,7 +6,7 @@ generator zod {
   output   = "./zod" // (default) the directory where generated zod schemas will be saved
 
   // imports = null // (default) will import the referenced file in generated schemas to be used via imports.someExportedVariable
-  imports = "../src/zod-schemas"
+  // imports = "../src/zod-schemas"
 
   relationModel = true // (default) Create and export both plain and related models.
   // relationModel         = "default" // Do not export model without relations.

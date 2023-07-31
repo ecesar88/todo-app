@@ -7,7 +7,9 @@ export const GetUserSchema: z.ZodSchema<User> = z.object({
   name: z.string().nullable(),
 })
 
-export const CreateUserSchema: z.ZodSchema<Omit<User, 'id'>> = z.object({
+export type UserWithoutId = Omit<User, 'id'>
+
+export const CreateUserSchema: z.ZodSchema<UserWithoutId> = z.object({
   email: z.string().email(),
   name: z.string(),
 })

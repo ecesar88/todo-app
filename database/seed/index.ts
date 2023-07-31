@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { runUserSeed } from './users.seed'
+import { runTodoSeed } from './todo.seed'
 
 async function runSeeds() {
   const prisma = new PrismaClient({
@@ -8,6 +9,7 @@ async function runSeeds() {
   })
 
   await runUserSeed(prisma)
+  await runTodoSeed(prisma)
 }
 
 runSeeds()

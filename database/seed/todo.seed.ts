@@ -2,13 +2,15 @@ import { PrismaClient } from '@prisma/client'
 import { faker } from '@faker-js/faker'
 
 export async function runTodoSeed(prisma: PrismaClient) {
-  const todos = Array(20)
+  const todos = Array(10)
     .fill(undefined)
     .map(() =>
-      prisma.user.create({
+      prisma.todo.create({
         data: {
-          name: faker.person.fullName(),
-          email: faker.internet.email(),
+          title: faker.airline.airplane().name,
+          content: faker.lorem.lines(3),
+          done: faker.datatype.boolean(),
+          userId: 1,
         },
       })
     )

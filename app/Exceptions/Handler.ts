@@ -26,7 +26,6 @@ export default class ExceptionHandler extends HttpExceptionHandler {
   }
 
   public async handle(exception: any, ctx: HttpContextContract) {
-    console.log('>>>>>>>>>>>>>> \n\n', JSON.stringify(exception, null, 2))
     if (exception.code === 'E_ROUTE_NOT_FOUND') {
       return ctx.response.status(HttpStatus.NOT_FOUND).json({
         status: HttpStatus.NOT_FOUND,

@@ -43,7 +43,7 @@ export default class UserController {
       where: {
         id: parseInt(id),
       },
-      data: dataToUpdate,
+      data: dataToUpdate!,
     })
 
     return res.status(HttpStatus.OK).send(user)

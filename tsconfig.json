@@ -3,11 +3,13 @@
   "include": ["**/*"],
   "exclude": ["node_modules", "build"],
   "compilerOptions": {
+    "target": "ES2022",
     "strict": true,
     "baseUrl": "./",
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
+    "noImplicitAny": true,
     "paths": {
       "App/*": ["./app/*"],
       "Config/*": ["./config/*"],

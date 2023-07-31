@@ -8,6 +8,7 @@ export default class GlobalResponseSerializerInterceptor {
     // Reference:
     // https://stackoverflow.com/questions/56648926/modify-response-body-before-res-send-executes-in-expressjs
     // https://stackoverflow.com/questions/54526179/node-js-difference-between-http-finish-event-response-close-event-and-respons
+    //
 
     const originalResSend = res.send
 

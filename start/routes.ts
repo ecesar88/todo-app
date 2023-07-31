@@ -20,13 +20,24 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+const numericId = new RegExp(/^[0-9]+$/)
+
 Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+Route.get('/healthcheck', async () => {
+  return { version: '0.1' }
+})
+
 Route.group(() => {
   Route.get('users', 'UserController.get')
-  Route.get('users/:id', 'UserController.findOne')
+  Route.get('users/:id', 'UserController.findOne').where('id', numericId)
   Route.post('users', 'UserController.create')
-  Route.delete('users/:id', 'UserController.delete')
+  Route.patch('users/:id', 'UserController.update').where('id', numericId)
+  Route.delete('users/:id', 'UserController.delete').where('id', numericId)
+})
+
+Route.group(() => {
+  Route.get('todo', 'TodoController.get')
 })

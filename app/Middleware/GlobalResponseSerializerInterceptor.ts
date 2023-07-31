@@ -8,7 +8,7 @@ export default class GlobalResponseSerializerInterceptor {
 
     const originalResSend = res.send
 
-    const modifyResponse = (body: any) => {
+    const modifyResponse = (body: Record<string, any> | any[]) => {
       const wasRequestSuccessfull = res.response.statusCode >= 200 && res.response.statusCode <= 300
 
       let response: { meta: { status: number; success: boolean }; data?: any } = {
@@ -19,7 +19,7 @@ export default class GlobalResponseSerializerInterceptor {
       }
 
       if (wasRequestSuccessfull) {
-        response.data = body
+        response.data = body ?? []
       } else {
         response = { ...response, ...body }
       }

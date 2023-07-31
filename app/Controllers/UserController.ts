@@ -31,7 +31,7 @@ export default class UserController {
       },
     })
 
-    return res.status(HttpStatus.OK).send(user)
+    return res.status(user ? HttpStatus.OK : HttpStatus.NOT_FOUND).send(user)
   }
 
   public async update({ response: res, request: req, params: { id } }: HttpContextContract) {

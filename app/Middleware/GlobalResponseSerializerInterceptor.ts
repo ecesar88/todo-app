@@ -1,4 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { HttpStatus } from 'App/Lib/Api/enums/http-status.enum'
+
+export type ResponseObject = { meta: { status: number; success: boolean }; data?: any }
 
 export default class GlobalResponseSerializerInterceptor {
   public async handle({ response: res }: HttpContextContract, next: () => Promise<void>) {
@@ -9,12 +12,12 @@ export default class GlobalResponseSerializerInterceptor {
     const originalResSend = res.send
 
     const modifyResponse = (body: Record<string, any> | any[]) => {
-      const wasRequestSuccessfull = res.response.statusCode >= 200 && res.response.statusCode <= 300
+      const wasRequestSuccessfull = res.response.statusCode < HttpStatus.INTERNAL_SERVER_ERROR
 
-      let response: { meta: { status: number; success: boolean }; data?: any } = {
+      let response: ResponseObject = {
         meta: {
           status: res.response.statusCode,
-          success: res.response.statusCode >= 200 && res.response.statusCode <= 300,
+          success: wasRequestSuccessfull,
         },
       }
 

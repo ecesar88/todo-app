@@ -38,12 +38,20 @@ export default class ExceptionHandler extends HttpExceptionHandler {
         case 'ZodError': {
           return ctx.response.status(HttpStatus.UNPROCESSABLE_ENTITY).json({
             message: `ValidationError`,
-            errors: (exception as ZodError).issues.map(({ code, message, path, fatal }) => ({
-              code,
-              message,
-              fatal,
-              field: path.join(', '),
-            })),
+            errors: (exception as ZodError).issues.map(({ code, message, path, fatal }) => {
+              const customIssueResponse: Record<string, any> = {}
+
+              if (code !== 'custom') {
+                customIssueResponse.code = code
+                customIssueResponse.message = message
+                customIssueResponse.fatal = fatal
+                customIssueResponse.field = path.join(', ')
+              } else {
+                customIssueResponse.message = message
+              }
+
+              return customIssueResponse
+            }),
           })
         }
       }

@@ -1,5 +1,6 @@
 import { Todo } from '@prisma/client'
 import { TodoModel } from 'Database/prisma/zod'
+import { atLeastOneDefined } from '../atLeastOneDefined'
 
 export type TodoWithoutId = Omit<Todo, 'id'>
 
@@ -11,4 +12,8 @@ export const CreateTodoSchema = TodoModel.omit({
 
 export const UpdateTodoSchema = TodoModel.omit({
   id: true,
-}).optional()
+})
+  .partial()
+  .refine(atLeastOneDefined, {
+    message: 'One of the fields must be defined',
+  })
